@@ -1,0 +1,38 @@
+#root {
+  max-width: 100vw;
+  text-align: center;
+  overflow: hidden;
+}
+
+.habitList{
+  
+}           
+.habitList::-webkit-scrollbar {
+  display: none;
+}
+
+.inputField{
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+  justify-content: left;
+  margin:10px
+
+}
+.inputField input {
+  margin-left: 10px;
+}
+.habitForm{
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  
+}
+
+.habitDetails p{
+/* margin-right: 60px; */
+}
+.habitDetails button{
+  text-align: center;
+}
