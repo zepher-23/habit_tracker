@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-
+import Store from '../Store'
 const Weekly = ({itemIndex, name, duration, status, date, list ,setList}) => {
-  const [state, setState] = useState(Array(6).fill('none'));
-
+  
+const [state, setState] = useState(Store.getState())
+const [pastState, setPastState] = useState(state[itemIndex].history);
   //---------------function to handle changes in habit status-----------------//
   const handleStateChange = (index, event) => {
-    const newState = [...state];
+    const newState = [...pastState];
     newState[index] = event.target.value;
-    setState(newState);
+    setPastState(newState);
+    Store.dispatch({type:'WEEKLY_UPDATE',payload:{habitIndex:itemIndex,historyIndex:index,status:newState[index]}})
+setState(Store.getState());
   };
 
   //----------------------function to get the past 6 dates of the habit-------------------//
@@ -29,7 +32,7 @@ const Weekly = ({itemIndex, name, duration, status, date, list ,setList}) => {
       {getPreviousDates().map((date, index) => (
         <div  key={date}>
           <span style={{marginRight:'10px'}}>{date}</span>
-          <select value={state[index]} onChange={(event) => handleStateChange(index, event)}>
+          <select value={pastState[index]} onChange={(event) => handleStateChange(index, event)}>
             <option value="none">None</option>
             <option value="done">Done</option>
             <option value="not done">Not Done</option>

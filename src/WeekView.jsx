@@ -8,6 +8,9 @@ import Store from './Store'
 import Reducers from './Reducers'
 function WeekView() {
     const navigate = useNavigate();
+    const [list, setList] = useState(Store.getState());
+    console.log(list)
+
   const [weather,setWeather] = useState({
     time:"",
     temperature:"",
@@ -44,7 +47,6 @@ fetchData();
 
 
 
-  const [list, setList] = useState(Store.getState());
   
 
 

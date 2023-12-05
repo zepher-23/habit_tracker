@@ -17,7 +17,7 @@ function App() {
   
   })
   const [list, setList] = useState(Store.getState());
-
+console.log(list)
   const [temperature,setTemperature] = useState(null)
   const [time,setTime] = useState(null)
   const [data,setData] = useState({name:"",duration:''})

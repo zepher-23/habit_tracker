@@ -36,7 +36,17 @@ else if(action.type=== "UPDATE_DETAILED"){
     let index = action.payload.index 
     let status = action.payload.status
     state[index].status = status;
-    return {...state}
+    state[index].history[0] = status;
+    return [...state]
+}
+
+else if(action.type==="WEEKLY_UPDATE"){
+    let habitIndex = action.payload.habitIndex 
+    let historyIndex = action.payload.historyIndex 
+    let status = action.payload.status 
+
+    state[habitIndex].history[historyIndex] = status;
+    return [...state]
 }
  return state
 }
