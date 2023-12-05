@@ -1,4 +1,4 @@
-
+//-------------initiaal dummy habits as a state---------------//
 const initialState =  [{
     name:'Running',
     date:'22 November 2023, 1:43 AM',
@@ -21,6 +21,7 @@ const initialState =  [{
 
 
 
+  //-----------------main reducer function------------------//
 const reducer = (state=initialState ,action) =>{
 
 if(action.type === "ADD_HABIT")
@@ -31,6 +32,10 @@ else if(action.type==='DELETE_ALL'){
     return []
 }
 else if(action.type=== "UPDATE_DETAILED"){
+
+    let index = action.payload.index 
+    let status = action.payload.status
+    state[index].status = status;
     return {...state}
 }
  return state

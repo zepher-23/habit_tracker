@@ -8,7 +8,6 @@ import Store from './Store'
 import Reducers from './Reducers'
 function App() {
   const navigate = useNavigate();
-
   const [weather,setWeather] = useState({
     time:"",
     temperature:"",
@@ -17,11 +16,15 @@ function App() {
     location:""
   
   })
+  const [list, setList] = useState(Store.getState());
+
   const [temperature,setTemperature] = useState(null)
   const [time,setTime] = useState(null)
   const [data,setData] = useState({name:"",duration:''})
   const [message, setMessage] = useState(null)
   const [view,setView] = useState(1)
+
+  //---------------- Function to fetch current date, time and weather.------------------------//
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,11 +47,8 @@ function App() {
 fetchData();
   }, []);
 
-  // Store.dispatch({type:'VIEW',payload:'WEEKLY'})
 
 
-  const [list, setList] = useState(Store.getState());
-  //console.log(time)
   
 
 
@@ -72,11 +72,10 @@ fetchData();
     return (day +" "+ month +" "+ year +", " + formattedTime );
 }
 
+
+//-------------  Function to add new habit -------------------//
 const handleSubmit = (e)=>{
   e.preventDefault();
-
-  
-
   setData({name:e.target[0].value,duration:e.target[1].value})
 
   let name = e.target[0].value;
@@ -85,7 +84,9 @@ const handleSubmit = (e)=>{
   if(name==="" || duration==="")
   setMessage("The input field cannot be empty!")
 else
-  // setList([...list,{name:name,date:time,duration:duration}])
+
+
+//----------------updates the state of the habits using redux---------------//
 Store.dispatch({
   type:'ADD_HABIT',
    payload:{
@@ -103,18 +104,22 @@ console.log()
 
 }
 
-
+//------------------- Function to delete all Habits---------------//
 const handleDeleteAll=()=>{
   Store.dispatch({type:'DELETE_ALL'})
   setList(Store.getState())
   console.log(list)
 }
 
+
+//--------------------------------Function to handle view changes------------------------//
  const handleView=()=>{
   
   navigate("/weekly")
 
  }
+
+
   return (
     <>
        <div className="main" style={{width:'100vw',overflow:'hidden'}} >
@@ -133,6 +138,8 @@ const handleDeleteAll=()=>{
 
         <div className="container" style={{width:'100vw',display:'flex',flexDirection:'row',overflow:'hidden'}}>
 
+
+{/* ---------------------detailed habits list view , you can delete and change status of the habit here---------------------- */}
         <div className="habitList" style={{height:'600px',width:'80vw',overflow:'scroll',paddingTop:'40px'}}>
 
        {view=== 1 ? list.map((item,index) => (
@@ -145,16 +152,16 @@ const handleDeleteAll=()=>{
 
         </div>
 
+
+
+{/* ------------------------- section to add new habists----------------------------- */}
         <div className="addHabit" style={{display:'flex',flexDirection:'column',width:'50vw',alignItems:'center',justifyContent:'center'}}>
           <form onSubmit= {(e)=>{handleSubmit(e)}} className='habitForm'>
             <div className="inputField">
               <label htmlFor="name"> Habit Name </label>
               <input type="text" name='name' placeholder=' Enter Habit Name'  />
             </div>
-            {/* <div className="inputField">
-              <label htmlFor="intervals">Intervals in a week </label>
-              <input type="text" name='intervals' placeholder='Enter the count' />
-            </div> */}
+           
             <div className="inputField">
               <label htmlFor="duration">Duration </label>
               <input type="text" name='duration' placeholder='Enter duration'  />
@@ -162,15 +169,13 @@ const handleDeleteAll=()=>{
 
             <button type='submit' style={{margin:'10px'}}> Add habit</button>
 
-           
-
-
-
-
           </form>
+
+          {/* ------------------buttton to delete all habits----------------------- */}
           <button onClick={handleDeleteAll}>Delete all</button>
 
 
+{/* ---------------------------error messages in case any------------------------ */}
           <h3 style={{color:'red'}}>{message}</h3>
 
 

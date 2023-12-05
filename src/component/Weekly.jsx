@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 const Weekly = ({itemIndex, name, duration, status, date, list ,setList}) => {
   const [state, setState] = useState(Array(6).fill('none'));
 
+  //---------------function to handle changes in habit status-----------------//
   const handleStateChange = (index, event) => {
     const newState = [...state];
     newState[index] = event.target.value;
     setState(newState);
   };
 
+  //----------------------function to get the past 6 dates of the habit-------------------//
   const getPreviousDates = () => {
     const dates = [];
     for (let i = 0; i < 6; i++) {

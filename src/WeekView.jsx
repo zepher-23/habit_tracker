@@ -34,7 +34,6 @@ function WeekView() {
           setWeather({time:time,temperature:temp,icon:weather_icon,type:weather_type,location:location})
           setTime(time);
           setTemperature(temp+"°C")
-          // Set the fetched data into state
       } catch (error) {
           console.log(error); 
   };
@@ -43,11 +42,9 @@ function WeekView() {
 fetchData();
   }, []);
 
-  // Store.dispatch({type:'VIEW',payload:'WEEKLY'})
 
 
   const [list, setList] = useState(Store.getState());
-  //console.log(time)
   
 
 
@@ -71,41 +68,8 @@ fetchData();
     return (day +" "+ month +" "+ year +", " + formattedTime );
 }
 
-const handleSubmit = (e)=>{
-  e.preventDefault();
-
-  
-
-  setData({name:e.target[0].value,duration:e.target[1].value})
-
-  let name = e.target[0].value;
-  let duration = e.target[1].value
-
-  if(name==="" || duration==="")
-  setMessage("The input field cannot be empty!")
-else
-  // setList([...list,{name:name,date:time,duration:duration}])
-Store.dispatch({
-  type:'ADD_HABIT',
-   payload:{
-    name:name,
-    duration:duration,
-    date:time,
-    history:['none',"none","none","none",'none',"none"]
-  }
-})
-
-setList(Store.getState())
-
-console.log()
 
 
-}
-
-
-const handleDeleteAll=()=>{
-  setList([{}])
-}
 
 const handleView=()=>{
     
@@ -133,37 +97,7 @@ const handleView=()=>{
 
        { list.map((item,index) => <Weekly key={index}  itemIndex={index} name={item.name} status={item.status} date={item.date} duration={item.duration} list={list} setList={setList} />)}
         </div>
-        {/* <div className="vBar" style={{height:'50vw',width:'1px',backgroundColor:'#555555',borderRadius:'10px'}}>
-
-        </div> */}
-
-        {/* <div className="addHabit" style={{display:'flex',flexDirection:'column',width:'50vw',alignItems:'center',justifyContent:'center'}}>
-          <form onSubmit= {(e)=>{handleSubmit(e)}} className='habitForm'>
-            <div className="inputField">
-              <label htmlFor="name"> Habit Name </label>
-              <input type="text" name='name' placeholder=' Enter Habit Name'  />
-            </div>
-           
-            <div className="inputField">
-              <label htmlFor="duration">Duration </label>
-              <input type="text" name='duration' placeholder='Enter duration'  />
-            </div>
-
-            <button type='submit' style={{margin:'10px'}}> Add habit</button>
-
-           
-
-
-
-
-          </form>
-          <button onClick={handleDeleteAll}>Delete all</button>
-
-
-          <h3 style={{color:'red'}}>{message}</h3>
-
-
-        </div> */}
+        
       </div>
 
 
