@@ -34,6 +34,6 @@ You should see the habit tracker app running!
 ## Note
 This application uses Redux@4.1.0
 
-You can view the app at `https://skilltest-habit-tracker.netlify.app/`
+You can view the app at https://skilltest-habit-tracker.netlify.app/
 
 
