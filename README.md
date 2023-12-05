@@ -14,6 +14,8 @@ In home page you can view all the habits currently tracked and you can add, dele
 The Navbar displays the title of the app along with complete date and weather for the present day.
 This is achieved by using an open source API.
 
+The components to view each habit is store inside the `component` folder.
+The store and the reducer file is stored directly in the root `src` folder, since it straight forward.
 
 ## Installation
 
