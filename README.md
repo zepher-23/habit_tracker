@@ -1,8 +1,7 @@
 # Habit Tracker App
 
-------------------------------------------------------------------------------
+This app is designed and built using React, Redux and Vite .
 
-This app is designed and built using React, Redux and React Router.
 ## Getting Started
 These instructions will get you a copy of the project up and running on your local machine for development purposes. See installation guide for more.
 
